@@ -60,7 +60,10 @@ class CreateMealForm extends React.Component {
                             <label htmlFor="mealName">Name:</label>
                             <input name="mealName" type="text" id="mealName" ref="mealName" required="" onChange={onChange}/>
                             <label htmlFor="cookedWeight">Cooked Weight:</label>
-                            <input name="cookedWeight" type="number" id="mealName" ref="cookedWeight" required="" onChange={onChange}/>
+                                <div className="input-group">
+                                    <input className="input-group-field" name="cookedWeight" type="number" id="mealName" ref="cookedWeight" required="" onChange={onChange}/>
+                                    <span className="input-group-label">g</span>
+                                </div>
                             <div className="incrementer">
                                 <label htmlFor="servings">Servings:</label>
                                 <div className="input-group input-number-group">
