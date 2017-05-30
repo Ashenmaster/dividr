@@ -27,7 +27,8 @@
     "newrelic": "^1.38.2",
     "passport": "^0.3.2",
     "passport-jwt": "^2.2.1",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "validator": "^7.0.0"
   },
   "devDependencies": {
     "codecov": "^2.1.0",
