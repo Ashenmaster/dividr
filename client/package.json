@@ -6,7 +6,8 @@
   "author": "Chris Gray",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "build": "webpack -p"
   },
   "dependencies": {
     "axios": "^0.16.1",

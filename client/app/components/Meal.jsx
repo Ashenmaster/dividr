@@ -91,7 +91,10 @@ class Meal extends React.Component {
 
                         <div className="card-profile-stats-container">
                             <div className="card-profile-stats-statistic">
-                                    <input type="number" ref="cookedWeight" defaultValue={cookedWeight}/>
+                                <div className="input-group">
+                                    <input className="input-group-field" type="number" ref="cookedWeight" defaultValue={cookedWeight}/>
+                                    <span className="input-group-label">g</span>
+                                </div>
                                 <p>Cooked Weight</p>
                             </div>
                             <div className="card-profile-stats-statistic">
