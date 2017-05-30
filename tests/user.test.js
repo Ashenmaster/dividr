@@ -21,6 +21,18 @@ describe('POST /register', () => {
             });
     });
 
+    it('should FAIL [422] to create a user with an invalid e-mail address', (done) => {
+        request(app)
+            .post('/api/v1/register')
+            .send({ email: 'test', firstName: 'Chris', lastName: 'Gray', password: 'secret'})
+            .expect(422)
+            .end((err, res) => {
+                if (err) done(err);
+                expect(res.body.error).toEqual('Please enter a valid e-mail address');
+                done();
+            });
+    });
+
     it('should FAIL [422] to create a user with incomplete parameters', (done) => {
         request(app)
             .post('/api/v1/register')

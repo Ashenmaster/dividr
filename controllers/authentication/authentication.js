@@ -2,6 +2,7 @@ require('./../../config/config');
 
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
+const validator = require('validator');
 
 // local imports
 const User = require('./../../models/user');
@@ -52,6 +53,10 @@ exports.register = (req, res, next) =>{
     // Return error if no email provided
     if (!email) {
         return res.status(422).send({ error: 'You must enter an email address.'});
+    }
+
+    if(!validator.isEmail(email)) {
+        return res.status(422).send({error: 'Please enter a valid e-mail address'})
     }
 
     // Return error if full name not provided
