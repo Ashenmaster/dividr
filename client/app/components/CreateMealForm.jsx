@@ -40,7 +40,18 @@ class CreateMealForm extends React.Component {
     //};
 
     render() {
-        let {onSubmit, onClick, onChange, errors} = this.props;
+        let {onSubmit, onClick, onChange, errors, mealLength} = this.props;
+        let renderCancelButton = () => {
+            if (mealLength === 0) {
+                return null
+            } else {
+                return (
+                    <button className="button large alert" onClick={onClick}>
+                        Cancel
+                    </button>
+                )
+            }
+        };
         return (
             <div>
                 {errors.errors.statusMessage  && <FlashMessage message={errors.errors.statusMessage} messageType="alert"/>}
@@ -79,9 +90,7 @@ class CreateMealForm extends React.Component {
                                 <button type="submit" className="button large">
                                     Submit
                                 </button>
-                                <button className="button large alert" onClick={onClick}>
-                                    Cancel
-                                </button>
+                                {renderCancelButton()}
                             </form>
                         </div>
                     </div>

@@ -137,6 +137,7 @@ class MealList extends React.Component {
             }
         };
 
+
         let {user, meals} = this.state;
         let renderDeleteOrCreate = () => {
             if(this.state.startDelete) {
@@ -147,26 +148,30 @@ class MealList extends React.Component {
                 return (
                     <CreateMealForm onSubmit={this.processForm} errors={errorMessage()} onChange={this.changeMeal} onClick={this.cancelCreate} />
                 )
-            } else return (
+            } else if(meals.length === 0) {
+                return (
+                    <CreateMealForm onSubmit={this.processForm} errors={errorMessage()} onChange={this.changeMeal} onClick={this.cancelCreate} mealLength={meals.length} />
+                )
+            }  else {
+                return (
 
-                        <div>
-                            <h3 className="meallist-title text-center">Welcome back {user.profile.firstName}!
-                                <br/>
-                                Here's your weeks meals</h3>
-                            {meals.map((meal) => {
-                                return (
-                                    <Meal key={meal._id} meal={meal} />
-                                )
-                            })}
-                        </div>
+                    <div>
+                        {meals.map((meal) => {
+                            return (
+                                <Meal key={meal._id} meal={meal} />
+                            )
+                        })}
+                    </div>
 
 
-            )
+                )
+            }
         };
         return (
             <div className="row">
                 <div className="column small-centered medium-4 large-6">
                     <div className="meal-list">
+                        <h3 className="meallist-title text-center">Welcome back {user.profile.firstName}!</h3>
                 {renderDeleteOrCreate()}
                     <div className="button-group-option" data-grouptype="OR">
                         <button onClick={this.startCreating} className="button success radius">New Meal</button>
