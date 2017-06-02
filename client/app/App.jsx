@@ -17,8 +17,6 @@ import MealList from 'Components/MealList';
 import NewWeek from 'Components/NewWeek';
 
 import 'style-loader!css-loader!sass-loader!./styles/app.scss';
-import 'script-loader!./../node_modules/jquery/dist/jquery.min'
-import 'script-loader!./../node_modules/foundation-sites/dist/js/foundation.min'
 
 $(document).ready(function(){
     $(document).Foundation;
