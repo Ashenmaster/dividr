@@ -127,7 +127,7 @@ class MealList extends React.Component {
             if (this.state.errors.data) {
                 return {
                     errors: {
-                        statusMessage: 'Something went wrong, please check your inputs below'
+                        statusMessage: this.state.errors.data.error
                     }
                 }
             } else {

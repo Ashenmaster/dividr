@@ -87,8 +87,71 @@ describe('POST /meals', () => {
                     cookedWeight,
                     servings
                 })
-                .expect(400, done);
+                .expect(422, done);
         });
+    });
+
+    it('should FAIL[422] if a meal is created with no meal name', (done) => {
+        let cookedWeight = 1000;
+        let servings = 2;
+        createLoginToken(app, validLogin, (header) => {
+            request(app)
+                .post('/api/v1/meals')
+                .set('Authorization', header)
+                .send({
+                    cookedWeight,
+                    servings
+                })
+                .expect(422)
+                .end((err, res) => {
+                    if (err) done(err);
+
+                    expect(res.body.error).toEqual('Please provide a name for your meal');
+                    done();
+                });
+        })
+    });
+
+    it('should FAIL[422] if a meal is created with no cooked weight', (done) => {
+        let mealName = "Falafel";
+        let servings = 2;
+        createLoginToken(app, validLogin, (header) => {
+            request(app)
+                .post('/api/v1/meals')
+                .set('Authorization', header)
+                .send({
+                    mealName,
+                    servings
+                })
+                .expect(422)
+                .end((err, res) => {
+                    if (err) done(err);
+
+                    expect(res.body.error).toEqual('Please provide a cooked weight in grams');
+                    done();
+                });
+        })
+    });
+
+    it('should FAIL[422] if a meal is created with no servings', (done) => {
+        let mealName = "falafel";
+        let cookedWeight = 1000;
+        createLoginToken(app, validLogin, (header) => {
+            request(app)
+                .post('/api/v1/meals')
+                .set('Authorization', header)
+                .send({
+                    cookedWeight,
+                    mealName
+                })
+                .expect(422)
+                .end((err, res) => {
+                    if (err) done(err);
+
+                    expect(res.body.error).toEqual('Please provide how many servings this is for');
+                    done();
+                });
+        })
     });
 
     it('should not create a meal with no data sent', (done) => {
@@ -97,7 +160,7 @@ describe('POST /meals', () => {
                 .post('/api/v1/meals')
                 .set('Authorization', header)
                 .send()
-                .expect(400, done);
+                .expect(422, done);
         });
     });
 
