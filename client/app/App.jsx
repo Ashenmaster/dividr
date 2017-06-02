@@ -19,6 +19,7 @@ import NewWeek from 'Components/NewWeek';
 import 'style-loader!css-loader!sass-loader!./styles/app.scss';
 
 $(document).ready(function(){
+    //noinspection BadExpressionStatementJS
     $(document).Foundation;
 });
 
