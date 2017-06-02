@@ -50,6 +50,8 @@ class MealList extends React.Component {
         if(!Auth.isUserAuthenticated()) {
             hashHistory.push('/login');
         }
+
+        document.title = "Dividr | Meal List"
     }
 
     startDeleting = (event) => {
