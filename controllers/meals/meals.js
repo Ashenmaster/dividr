@@ -42,7 +42,6 @@ let getMeal = (req, res) => {
 };
 
 let createMeal = (req, res) => {
-    console.log(req.body);
     let meal = new Meal({
         mealName : req.body.mealName,
         cookedWeight : req.body.cookedWeight,
@@ -50,6 +49,19 @@ let createMeal = (req, res) => {
         portionSize : Math.floor(req.body.cookedWeight / req.body.servings),
         _creator : req.user._id
     });
+
+    if(!meal.mealName) {
+        return res.status(422).send({error: 'Please provide a name for your meal'})
+    }
+
+    if(!meal.cookedWeight) {
+        return res.status(422).send({error: 'Please provide a cooked weight in grams'})
+    }
+
+    if(!meal.servings) {
+        return res.status(422).send({error: 'Please provide how many servings this is for'})
+    }
+
 
     meal.save().then((doc) => {
         res.send(doc)
@@ -92,8 +104,9 @@ let updateMeal = (req, res) => {
     let id = req.params.id;
     let body = _.pick(req.body, ['mealName', 'servings', 'cookedWeight']);
     if(!ObjectID.isValid(id)) {
-        return res.sendStatus(404);
+        return res.status(404).send({error: 'Meal not found'});
     }
+
     Meal.findOneAndUpdate({
         _id : id
     }, { $set : body}, {new : true}).then((meal) => {

@@ -7,11 +7,11 @@ class DeleteConfirm extends React.Component {
     }
 
     render() {
-    let {onClick} = this.props;
+    let {onClick, message} = this.props;
         return (
             <div className="card-profile-stats">
                 <h3>Are you sure?</h3>
-                <p>Starting a new week will delete all meals in your list, this not an undoable action.</p>
+                <p>{message}, this not an undoable action.</p>
                 <p>Are you sure you want to continue?</p>
                 <div className="clearfix">
                     <Link to="/newweek">

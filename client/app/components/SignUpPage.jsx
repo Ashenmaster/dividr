@@ -79,6 +79,10 @@ class SignUpPage extends React.Component {
         });
     }
 
+    componentWillMount() {
+        document.title = "Dividr | Sign Up"
+    }
+
     /**
      * Render the component.
      */

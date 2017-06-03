@@ -40,7 +40,18 @@ class CreateMealForm extends React.Component {
     //};
 
     render() {
-        let {onSubmit, onClick, onChange, errors} = this.props;
+        let {onSubmit, onClick, onChange, errors, mealLength} = this.props;
+        let renderCancelButton = () => {
+            if (mealLength === 0) {
+                return null
+            } else {
+                return (
+                    <button className="button large alert" onClick={onClick}>
+                        Cancel
+                    </button>
+                )
+            }
+        };
         return (
             <div>
                 {errors.errors.statusMessage  && <FlashMessage message={errors.errors.statusMessage} messageType="alert"/>}
@@ -60,7 +71,10 @@ class CreateMealForm extends React.Component {
                             <label htmlFor="mealName">Name:</label>
                             <input name="mealName" type="text" id="mealName" ref="mealName" required="" onChange={onChange}/>
                             <label htmlFor="cookedWeight">Cooked Weight:</label>
-                            <input name="cookedWeight" type="number" id="mealName" ref="cookedWeight" required="" onChange={onChange}/>
+                                <div className="input-group">
+                                    <input className="input-group-field" name="cookedWeight" type="number" id="mealName" ref="cookedWeight" required="" onChange={onChange}/>
+                                    <span className="input-group-label">g</span>
+                                </div>
                             <div className="incrementer">
                                 <label htmlFor="servings">Servings:</label>
                                 <div className="input-group input-number-group">
@@ -76,9 +90,7 @@ class CreateMealForm extends React.Component {
                                 <button type="submit" className="button large">
                                     Submit
                                 </button>
-                                <button className="button large alert" onClick={onClick}>
-                                    Cancel
-                                </button>
+                                {renderCancelButton()}
                             </form>
                         </div>
                     </div>

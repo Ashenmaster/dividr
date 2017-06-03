@@ -12,7 +12,7 @@ class LogoutPage extends React.Component {
                 }
             })
                 .then((response) => {
-                    console.log(response);
+                    //console.log(response);
                 }).catch((errors) => {
                     console.log(errors);
                 });

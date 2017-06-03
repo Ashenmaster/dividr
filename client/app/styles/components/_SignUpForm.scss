@@ -6,6 +6,7 @@ $social-brand-facebook: #3b5998;
   background: $form-registration-bg;
   border: 1px solid $light-gray;
   margin-top: 1rem;
+  margin-bottom: 1rem;
 
   .form-registration-img {
     position: relative;
@@ -13,7 +14,7 @@ $social-brand-facebook: #3b5998;
     .form-registration-img-caption {
       position: absolute;
       padding: 0.5rem;
-      padding-top:20rem;
+      padding-top: 1rem;
       text-align: center;
       width: 100%;
       bottom: 0;
@@ -21,7 +22,7 @@ $social-brand-facebook: #3b5998;
                       linear,
                       left bottom,
                       left top,
-                      color-stop(1, rgba($white, 0.3)), /* Top */
+                      color-stop(1, rgba($white, 0.1)), /* Top */
                       color-stop(0, rgba($white, 1.0)) /* Bottom */
       );
     }

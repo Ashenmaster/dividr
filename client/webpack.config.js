@@ -27,7 +27,7 @@ module.exports = {
 
     },
     output: {
-        path: path.resolve('public'),
+        path: path.resolve('public/public'),
         filename: 'app_bundle.js'
     },
     module: {
@@ -36,8 +36,8 @@ module.exports = {
             { test: /\.jsx$/, use: 'babel-loader', exclude: /node_modules/ },
             { test: /\.css$/, use: ExtractTextPlugin.extract({ use: 'css-loader?importLoaders=1'})},
             { test: /\.(sass|scss)$/, use: ExtractTextPlugin.extract(['css-loader', 'sass-loader'])},
-            { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
-            { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" }
+            { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, use: "url-loader?limit=10000&mimetype=application/font-woff" },
+            { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, use: "file-loader" }
         ]
     },
     plugins: [
@@ -47,7 +47,7 @@ module.exports = {
             'jQuery' : 'jquery'
         }),
         new ExtractTextPlugin({ // define where to save the file
-            filename: 'public/[name].bundle.css',
+            filename: '[name].bundle.css',
             allChunks: true,
         }),
         new webpack.ProvidePlugin({
