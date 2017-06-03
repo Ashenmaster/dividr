@@ -41,10 +41,12 @@ exports.logout = (req, res) => {
     res.status(200).send('Logged Out');
 };
 
+
+// TODO: Write test suites for this
 exports.forgot = (req, res) => {
     async.waterfall([
         (done) => {
-            crypto.randomBytes(20, function(err, buf) {
+            crypto.randomBytes(20, (err, buf) =>{
                 let token = buf.toString('hex');
                 done(err, token);
             });
@@ -58,7 +60,7 @@ exports.forgot = (req, res) => {
                 user.resetPasswordToken = token;
                 user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
 
-                user.save(function(err) {
+                user.save(err =>{
                     done(err, token, user);
                 });
             });
@@ -82,9 +84,7 @@ exports.forgot = (req, res) => {
                 'If you did not request this, please ignore this email and your password will remain unchanged.\n'
             };
             smtpTransport.sendMail(mailOptions, err =>{
-                //console.log(req);
                 return res.status(200).json({info : 'An e-mail has been sent to ' + user.email + ' with further instructions.'}).done(err, 'done');
-                //done(err, 'done');
             });
         },
     ], err =>{
@@ -93,6 +93,7 @@ exports.forgot = (req, res) => {
     });
 };
 
+// TODO: Write test suites for this
 exports.resetPassword = (req, res) => {
     async.waterfall([
         done =>{
@@ -105,7 +106,7 @@ exports.resetPassword = (req, res) => {
                 user.resetPasswordToken = undefined;
                 user.resetPasswordExpires = undefined;
 
-                user.save(function(err) {
+                user.save(err =>{
                     res.status(200).json({
                         info: "Password Saved, please log in"
                     });
