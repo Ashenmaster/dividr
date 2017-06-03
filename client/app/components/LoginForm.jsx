@@ -35,6 +35,9 @@ class LoginForm extends React.Component {
                            <button type="submit" id="loginButton" className="button form-registration-submit-button">Log In</button>
 
                            <p>Don't have an account? <Link to={'/signup'}>Create one</Link>.</p>
+                           <Link to="/forgotpassword">
+                               Forgot Password
+                           </Link>
                        </form>
                    </div>
                </div>
