@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Auth from '../modules/Auth';
 import LoginForm from './LoginForm.jsx';
+import { Link } from 'react-router';
 
 import axios from 'axios';
 
@@ -107,6 +108,8 @@ class LoginPage extends React.Component {
             return {
                 statusMessage: "Incorrect login details, please try again."
             }
+        } else {
+            return null
         }
     };
         return (
