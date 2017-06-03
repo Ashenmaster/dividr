@@ -122,9 +122,6 @@ class LoginPage extends React.Component {
                         successMessage={this.state.successMessage}
                         user={this.state.user}
                     />
-                    <Link to="/forgotpassword">
-                        Forgot Password
-                    </Link>
                 </div>
             </div>
         );

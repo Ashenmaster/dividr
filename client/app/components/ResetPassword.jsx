@@ -44,16 +44,14 @@ class ResetPassword extends React.Component {
                     <div className="form-registration">
                         <figure className="form-registration-img">
                             <img src="https://images.pexels.com/photos/221205/pexels-photo-221205.jpeg?h=350&auto=compress&cs=tinysrgb" alt="" />
-                            <figcaption className="form-registration-img-caption form-title">Login</figcaption>
+                            <figcaption className="form-registration-img-caption form-title">Reset Password</figcaption>
                         </figure>
                         <form className="form-registration-group" onSubmit={this.handleSubmit} action="/" data-abide="">
 
                             <label htmlFor="email">Password:</label>
                             <input className="form-registration-input" ref="password" type="password" id="password" name="password" />
 
-                            <button type="submit" id="loginButton" className="button form-registration-submit-button">Log In</button>
-
-                            <p>Don't have an account? <Link to={'/signup'}>Create one</Link>.</p>
+                            <button type="submit" id="loginButton" className="button form-registration-submit-button">Reset Password</button>
                         </form>
                     </div>
                 </div>

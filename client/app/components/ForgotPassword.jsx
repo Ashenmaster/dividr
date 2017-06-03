@@ -71,7 +71,7 @@ class ForgotPassword extends React.Component {
                         <label htmlFor="email">E-mail:</label>
                         <input className="form-registration-input" type="text" id="email" name="email" onChange={this.changeUser} />
 
-                        <button type="submit" id="loginButton" className="button form-registration-submit-button">Log In</button>
+                        <button type="submit" id="loginButton" className="button form-registration-submit-button">Reset Password</button>
 
                         <p>Don't have an account? <Link to={'/signup'}>Create one</Link>.</p>
                     </form>
@@ -84,7 +84,7 @@ class ForgotPassword extends React.Component {
                 <div className="form-registration">
                     <figure className="form-registration-img">
                         <img src="https://images.pexels.com/photos/221205/pexels-photo-221205.jpeg?h=350&auto=compress&cs=tinysrgb" alt="" />
-                        <figcaption className="form-registration-img-caption form-title">Login</figcaption>
+                        <figcaption className="form-registration-img-caption form-title">Forgot Password</figcaption>
                     </figure>
                         {formOrMessage()}
                 </div>

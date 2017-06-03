@@ -42,7 +42,6 @@ $social-brand-facebook: #3b5998;
   }
 
   .form-registration-submit-button {
-    text-transform: uppercase;
     margin-bottom: 0;
     @include button(true, $primary-color, auto, auto, solid);
     border-radius: 5000px;
