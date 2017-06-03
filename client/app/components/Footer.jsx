@@ -19,12 +19,6 @@ class Footer extends React.Component {
                                 <li>
                                     <Link to="/">Home</Link>
                                 </li>
-                                <li>
-                                    <Link to="/news">News</Link>
-                                </li>
-                                <li>
-                                    <Link to="/contact">Contact</Link>
-                                </li>
                             </ul>
                         </div>
                         <div id="copyright" className="column float-right">
