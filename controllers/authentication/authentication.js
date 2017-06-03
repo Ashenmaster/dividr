@@ -80,7 +80,7 @@ exports.forgot = (req, res) => {
                 subject: 'Node.js Password Reset',
                 text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
                 'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-                'http://' + req.headers.host + '/reset/' + token + '\n\n' +
+                'http://' + req.headers.host + '/#/reset/' + token + '\n\n' +
                 'If you did not request this, please ignore this email and your password will remain unchanged.\n'
             };
             smtpTransport.sendMail(mailOptions, err =>{
@@ -95,6 +95,7 @@ exports.forgot = (req, res) => {
 
 // TODO: Write test suites for this
 exports.resetPassword = (req, res) => {
+    console.log(req.body);
     async.waterfall([
         done =>{
             User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, (err, user) =>{
