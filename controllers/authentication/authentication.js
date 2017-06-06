@@ -21,7 +21,7 @@ function setUserInfo(request) {
         _id      : request._id,
         firstName: request.profile.firstName,
         lastName : request.profile.lastName,
-        email    : request.email,
+        email    : request.email.toLowerCase(),
     };
 }
 
@@ -54,7 +54,6 @@ exports.forgot = (req, res) => {
         (token, done) =>{
             User.findOne({ email: req.body.email }, (err, user) =>{
                 if (!user) {
-
                     return res.status(404).json({error : 'No account with that email address exists.'});
                 }
                 user.resetPasswordToken = token;
@@ -77,7 +76,7 @@ exports.forgot = (req, res) => {
                 debug: true,
                 to: user.email,
                 from: 'passwordreset@dividr.info',
-                subject: 'Node.js Password Reset',
+                subject: 'Dividr Password Reset',
                 text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
                 'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
                 'http://' + req.headers.host + '/#/reset/' + token + '\n\n' +
@@ -95,7 +94,6 @@ exports.forgot = (req, res) => {
 
 // TODO: Write test suites for this
 exports.resetPassword = (req, res) => {
-    console.log(req.body);
     async.waterfall([
         done =>{
             User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, (err, user) =>{
@@ -144,15 +142,20 @@ exports.resetPassword = (req, res) => {
 //========================================
 exports.register = (req, res, next) =>{
     // Check for registration errors
-    const email = req.body.email;
+    // Return error if no email provided
+    if (!req.body.email) {
+        return res.status(422).send({ error: 'You must enter an email address.'});
+    }
+
+    // Return error if no password provided
+    if (!req.body.password) {
+        return res.status(422).send({ error: 'You must enter a password.' });
+    }
+
+    const email = req.body.email.toLowerCase();
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
     const password = req.body.password;
-
-    // Return error if no email provided
-    if (!email) {
-        return res.status(422).send({ error: 'You must enter an email address.'});
-    }
 
     if(!validator.isEmail(email)) {
         return res.status(422).send({error: 'Please enter a valid e-mail address'})
@@ -163,10 +166,6 @@ exports.register = (req, res, next) =>{
         return res.status(422).send({ error: 'You must enter your full name.'});
     }
 
-    // Return error if no password provided
-    if (!password) {
-        return res.status(422).send({ error: 'You must enter a password.' });
-    }
 
     User.findOne({ email: email }, (err, existingUser) =>{
         if (err) { return next(err); }
