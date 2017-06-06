@@ -142,15 +142,20 @@ exports.resetPassword = (req, res) => {
 //========================================
 exports.register = (req, res, next) =>{
     // Check for registration errors
+    // Return error if no email provided
+    if (!req.body.email) {
+        return res.status(422).send({ error: 'You must enter an email address.'});
+    }
+
+    // Return error if no password provided
+    if (!req.body.password) {
+        return res.status(422).send({ error: 'You must enter a password.' });
+    }
+
     const email = req.body.email.toLowerCase();
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
     const password = req.body.password;
-
-    // Return error if no email provided
-    if (!email) {
-        return res.status(422).send({ error: 'You must enter an email address.'});
-    }
 
     if(!validator.isEmail(email)) {
         return res.status(422).send({error: 'Please enter a valid e-mail address'})
@@ -161,10 +166,6 @@ exports.register = (req, res, next) =>{
         return res.status(422).send({ error: 'You must enter your full name.'});
     }
 
-    // Return error if no password provided
-    if (!password) {
-        return res.status(422).send({ error: 'You must enter a password.' });
-    }
 
     User.findOne({ email: email }, (err, existingUser) =>{
         if (err) { return next(err); }
