@@ -21,7 +21,7 @@ function setUserInfo(request) {
         _id      : request._id,
         firstName: request.profile.firstName,
         lastName : request.profile.lastName,
-        email    : request.email,
+        email    : request.email.toLowerCase(),
     };
 }
 
@@ -54,7 +54,6 @@ exports.forgot = (req, res) => {
         (token, done) =>{
             User.findOne({ email: req.body.email }, (err, user) =>{
                 if (!user) {
-
                     return res.status(404).json({error : 'No account with that email address exists.'});
                 }
                 user.resetPasswordToken = token;
@@ -95,7 +94,6 @@ exports.forgot = (req, res) => {
 
 // TODO: Write test suites for this
 exports.resetPassword = (req, res) => {
-    console.log(req.body);
     async.waterfall([
         done =>{
             User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, (err, user) =>{
@@ -144,7 +142,7 @@ exports.resetPassword = (req, res) => {
 //========================================
 exports.register = (req, res, next) =>{
     // Check for registration errors
-    const email = req.body.email;
+    const email = req.body.email.toLowerCase();
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
     const password = req.body.password;
