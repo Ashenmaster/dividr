@@ -9,7 +9,7 @@
     "report-coverage": "nyc report --reporter=lcov > coverage.lcov && codecov"
   },
   "engines": {
-    "node": "7.0.0"
+    "node": "7.10.1"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
